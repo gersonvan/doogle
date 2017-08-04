@@ -1,0 +1,16 @@
+<h1>Listing words</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Definition</th>
+  </tr>
+
+  <% @words.each do |word| %>
+    <tr>
+      <td><%= word.name %></td>
+      <td><%= word.definition %></td>
+      <td><%= link_to 'Show', word_path(word) %></td>
+    </tr>
+  <% end %>
+</table>
