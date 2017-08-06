@@ -1,13 +1,18 @@
 class WordsController < ApplicationController
   def index
-    @words = Word.all
+    @words = Word.search(params[:name])
   end
 
   def show
     @word = Word.find(params[:id])
   end
 
+  def edit
+    @word = Word.find(params[:id])
+  end
+
   def new
+    @word = Word.new
   end
 
   def create
