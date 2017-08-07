@@ -10,12 +10,11 @@
   <tr>
     <th>Definition</th>
   </tr>
-  <% @words.each do |word| %>
-    <tr>
-      <td><%= word.definition %></td>
-<!--      <td><%= link_to 'Show', word_path(word) %></td>
-      <td><%= link_to 'Edit', word_path(word) %></td> -->
-    </tr>
+  <% if !@word.nil? %>
+    <% @word.each do |word|  %>
+      <tr>
+        <td><%= word.definition %></td>
+      </tr>
+    <% end %>
   <% end %>
-
 </table>
