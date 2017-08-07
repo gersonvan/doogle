@@ -1,11 +1,26 @@
 class WordsController < ApplicationController
   def index
-    @word = Word.find_by name: (params[:name])
-    if @word
-      @word = Word.search(params[:name])
-    else
-      flash[:notice] = 'Palavra não encontrada.'
-      Word.dicapi_search(params[:name])
+
+    if  name_params = params[:name]
+      @word = Word.find_by(name: name_params)
+
+
+      if @word
+        @word = Word.where(name: name_params)
+      else
+        @word = Word.dicapi_search(name_params)
+      end
+
+      # if !@word.is_a? Array
+      #   @word = [@word]
+      # end
+
+      puts "The word is : #{@word}"
+      #   Word.search(name_params)
+      # else
+      #   flash[:notice] = 'Palavra não encontrada.'
+      #   Word.dicapi_search(name_params)
+      # end
     end
   end
 
