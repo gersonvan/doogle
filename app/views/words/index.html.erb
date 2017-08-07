@@ -7,13 +7,14 @@
     <%= submit_tag 'Search' %>
   <% end %>
 
-
   <tr>
     <th>Definition</th>
   </tr>
-
-    <tr>
-      <td><% @word %></td>
-    </tr>
-
+  <% if !@word.nil? %>
+    <% @word.each do |word|  %>
+      <tr>
+        <td><%= word.definition %></td>
+      </tr>
+    <% end %>
+  <% end %>
 </table>
