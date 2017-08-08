@@ -1,7 +1,14 @@
 require 'test_helper'
 
 class WordTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
+
+  def test_dicapi_search
+    search_name = "unconstitutional"
+    word = Word.dicapi_search(search_name)
+    if !word.nil?
+      word.each do |word|
+        assert_equal(words(:dicapi).definition, word.definition)
+      end
+    end
+  end
 end
