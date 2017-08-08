@@ -10,18 +10,18 @@ class Word < ApplicationRecord
       puts word
       json = JSON.parse(word)
       result = if json['entries'].empty?
-        json['suggestions']
-        # Colocar sugestões para aparecer na tela junto com "Did you mean?"
+        sug = json['suggestions']
+        {words: [], suggestions: sug}
       else
-        res = []
+        words = []
         json['entries'].each do |entry|
           entry['definitions'].each do |definition|
             create name: search_name, definition: definition['text']
-            res << self.new(name: search_name, definition: definition['text'])
+            words << self.new(name: search_name, definition: definition['text'])
           end
         end
-        res
+        {words: words, suggestions: []}
       end
       result
-    end
+  end
 end

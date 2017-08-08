@@ -5,10 +5,7 @@ class WordTest < ActiveSupport::TestCase
   def test_dicapi_search
     search_name = "unconstitutional"
     word = Word.dicapi_search(search_name)
-    if !word.nil?
-      word.each do |word|
-        assert_equal(words(:dicapi).definition, word.definition)
-      end
-    end
+    word.slice(:words, :suggestions)
+    assert_equal(words(:dicapi).definition, word[:words][0]['definition'])
   end
 end
