@@ -7,14 +7,24 @@
     <%= submit_tag 'Search' %>
   <% end %>
 
-  <tr>
-    <th>Definition</th>
-  </tr>
-  <% if !@word.nil? %>
-    <% @word.each do |word|  %>
+  <% if @suggestions.empty? %>
       <tr>
-        <td><%= word.definition %></td>
+        <th>Definition</th>
       </tr>
+      <% @word.each do |word|  %>
+        <tr>
+          <td><%= word.definition %></td>
+        </tr>
+      <% end %>
+    <% else %>
+        <tr>
+          <th>Did you mean?</th>
+        </tr>
+
+        <% @suggestions.each do |sug|  %>
+            <tr>
+              <td><%= link_to sug, words_path(name: sug) %></td>
+            </tr>
+        <% end %>
     <% end %>
-  <% end %>
 </table>
